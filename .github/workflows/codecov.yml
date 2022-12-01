@@ -12,26 +12,26 @@ on:
       - "calc/**"
       - ".github/workflows/codecov.yml"
 jobs:
-    codecoverage:
-      name: Measure code coverage
-      runs-on: ubuntu-20.04
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
-      - run: git branch
-      - run: env  
-      - name: calling work1
-        uses: rahulk789/codecov/.github/workflows/work1.yml@main
-      - name: calling work2
-        uses: rahulk789/codecov/.github/workflows/work2.yml@main
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: "coverage-ubuntu-20.04-docker" 
+  calling_work1:
+    uses: rahulk789/codecov/.github/workflows/work1.yml@main
+  calling_work2:
+    uses: rahulk789/codecov/.github/workflows/work2.yml@main
+  codecoverage:
+    name: Measure code coverage
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: git branch
+    - run: env  
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: "coverage-ubuntu-20.04-docker" 
             #,"coverage-ubuntu-20.04-crio","cov-ubuntu-20.04-crio","cov-ubuntu-20.04-crio"
-      - name: Upload to CodeCov
-        uses: codecov/codecov-action@v3 
-        with:
-          files: ./gover.coverprofile
+    - name: Upload to CodeCov
+      uses: codecov/codecov-action@v3 
+      with:
+        files: ./gover.coverprofile
