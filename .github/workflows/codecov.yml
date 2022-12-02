@@ -12,13 +12,16 @@ on:
       - "calc/**"
       - ".github/workflows/codecov.yml"
 jobs:
+  
   calling_work1:
     uses: rahulk789/codecov/.github/workflows/work1.yml@main
   calling_work2:
     uses: rahulk789/codecov/.github/workflows/work2.yml@main
+  
   codecoverage:
     name: Measure code coverage
     runs-on: ubuntu-20.04
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -26,11 +29,20 @@ jobs:
         ref: ${{ github.event.workflow_run.head_branch }}
     - run: git branch
     - run: env  
+    
     - name: Download artifacts
       uses: dawidd6/action-download-artifact@v2
       with:
+        workflow: "work1.yml"
+        name: "coverage-ubuntu-20.04-docker" 
+            #,"coverage-ubuntu-20.04-crio","cov-ubuntu-20.04-crio",
+   
+    - name: Download artifacts
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: "work2.yml"
         name: "cov-ubuntu-20.04-docker" 
-            #,"coverage-ubuntu-20.04-crio","cov-ubuntu-20.04-crio","cov-ubuntu-20.04-crio"
+    
     - name: Upload to CodeCov
       uses: codecov/codecov-action@v3 
       with:
