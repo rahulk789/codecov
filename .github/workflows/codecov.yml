@@ -30,14 +30,16 @@ jobs:
     - run: git branch
     - run: env  
     
-    - name: Download artifacts
+    - name: Download artifact_1
+      id: download-artifact1
       uses: dawidd6/action-download-artifact@v2
       with:
         workflow: "work1.yml"
         name: "coverage-ubuntu-20.04-docker" 
             #,"coverage-ubuntu-20.04-crio","cov-ubuntu-20.04-crio",
    
-    - name: Download artifacts
+    - name: Download artifacts_2
+      id: download-artifact2
       uses: dawidd6/action-download-artifact@v2
       with:
         workflow: "work2.yml"
