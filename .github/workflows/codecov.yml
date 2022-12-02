@@ -33,6 +33,7 @@ jobs:
     - name: Download artifact_1
       id: download-artifact1
       uses: dawidd6/action-download-artifact@v2
+      continue-on-error: true
       with:
         workflow: "work1.yml"
         name: "coverage-ubuntu-20.04-docker" 
@@ -41,6 +42,7 @@ jobs:
     - name: Download artifacts_2
       id: download-artifact2
       uses: dawidd6/action-download-artifact@v2
+      continue-on-error: true
       with:
         workflow: "work2.yml"
         name: "cov-ubuntu-20.04-docker" 
